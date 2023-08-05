@@ -1,0 +1,35 @@
+//unmanaged implementation in class zbp_i_um_travel unique;
+implementation unmanaged;
+
+define behavior for zi_um_travel alias Travel
+implementation in class zbp_i_um_travel unique
+//late numbering
+//lock master
+//authorization master
+etag Lastchangedat
+{
+  field ( read only ) TravelID, TotalPrice, CurrencyCode;
+  field ( mandatory )   BeginDate, EndDate;
+  field ( features : instance ) CustomerId, AgencyID;
+
+
+
+  create;
+  update;
+  delete;
+  association _Booking { create; }
+}
+define behavior for zi_um_booking alias Booking
+implementation in class zbp_i_um_booking unique
+//late numbering
+//lock dependent( <local_field_name> = <target_field_name> )
+//authorization dependent( <local_field_name> = <target_field_name> )
+//etag <field_name>
+{
+  field ( read only ) TravelID, BookingID;
+  field ( mandatory ) BookingDate,  CarrierId, ConnectionID, FlightDate;
+
+  create;
+  update;
+  delete;
+}

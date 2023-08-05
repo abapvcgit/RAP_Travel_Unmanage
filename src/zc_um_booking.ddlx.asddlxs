@@ -1,0 +1,69 @@
+@Metadata.layer: #CORE
+@UI:{
+       headerInfo:{
+                typeName: 'Booking',
+                typeNamePlural: 'Bookings',
+                title:{
+                        type: #STANDARD,
+                        label: 'Connections',
+                        value: 'CarrierName'
+                },
+                description:{
+                        type: #STANDARD,
+                        value: 'BookingDate'
+                }
+
+       }
+}
+annotate view zc_um_booking with
+{
+
+  @UI.facet: [
+             { id: 'bookinginfo',
+               purpose: #STANDARD,
+               position: 10,
+               label: 'Travel Booking',
+               type: #COLLECTION  },
+                 { type: #FIELDGROUP_REFERENCE ,
+                   label : 'Booking information',
+                   parentId: 'bookinginfo',
+                   id: 'Information' ,
+                   position: 10,
+                   targetQualifier: 'iteminf'},
+       /* Header facets */
+             { purpose: #HEADER,
+               position: 10,
+               importance: #HIGH,
+               type: #DATAPOINT_REFERENCE,
+               targetQualifier: 'FlightPrice'}
+             ]
+
+  @UI.lineItem: [{ position: 10, importance: #HIGH }]
+  @UI.fieldGroup: [{ qualifier: 'iteminf', position: 10 ,importance: #HIGH }]
+  BookingId;
+  @UI.lineItem: [{ position: 20, importance: #HIGH }]
+  @UI.fieldGroup: [{ qualifier: 'iteminf', position: 20 ,importance: #HIGH }]
+  CarrierId;
+  @UI.lineItem: [{ position: 30, importance: #HIGH }]
+  @UI.fieldGroup: [{ qualifier: 'iteminf', position: 30 ,importance: #HIGH }]
+  ConnectionId;
+  @UI.lineItem: [{ position: 40, importance: #HIGH }]
+  @UI.fieldGroup: [{ qualifier: 'iteminf', position: 40 ,importance: #HIGH }]
+  FlightDate;
+  @UI.lineItem: [{ position: 50, importance: #HIGH }]
+  @UI.fieldGroup: [{ qualifier: 'iteminf', position: 50 ,importance: #HIGH }]
+  @UI.dataPoint.title: 'Flight Price'
+  FlightPrice;
+  @UI.lineItem: [{ position: 60, importance: #HIGH , label: 'Updated By'}]
+  Lastchangedby;
+  @UI.lineItem: [{ position: 70, importance: #HIGH, label: 'Updated' }]
+  Lastchangedat;
+
+  @UI.hidden: true
+  CarrierName;
+  @UI.hidden: true
+  Createdby;
+  @UI.hidden: true
+  Createdat;
+
+}

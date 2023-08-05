@@ -1,0 +1,127 @@
+@Metadata.layer: #CORE
+@UI:{
+       headerInfo:{
+                typeName: 'Travel List',
+                typeNamePlural: 'Travels List',
+                title:{
+                        type: #STANDARD,
+                        label: 'Connection',
+                        value: 'AgencyName'
+                },
+                description:{
+                        type: #STANDARD,
+                        value: 'AgencyId'
+                }
+       }
+}
+annotate view zc_um_travel with
+{
+  @UI.facet: [
+            {
+             id: 'travelinfo',
+             purpose: #STANDARD,
+             position: 10,
+             label: 'Travel',
+             type: #COLLECTION
+            },
+                {
+                 type: #FIELDGROUP_REFERENCE ,
+                 label : 'Travel information',
+                 parentId: 'travelinfo',
+                 id: 'Information' ,
+                 position: 10,
+                 targetQualifier: 'information'
+                },
+                {
+                 type: #FIELDGROUP_REFERENCE ,
+                 label : 'Total',
+                 parentId: 'travelinfo',
+                 id: 'Total' ,
+                 position: 20,
+                 targetQualifier: 'total'
+                },
+                {
+                 purpose: #STANDARD,
+                 position: 20,
+                 importance: #HIGH,
+                 label: 'Bookings Detail',
+                 type: #LINEITEM_REFERENCE,
+                 targetElement: '_Booking'
+                },
+  /* Header facets */
+          {
+           purpose:    #HEADER,
+           position:   10,
+           importance: #HIGH,
+           type:       #DATAPOINT_REFERENCE,
+           targetQualifier: 'TravelStatus'
+          },
+          {
+           purpose:    #HEADER,
+           position:   20,
+           importance: #HIGH,
+           type:       #DATAPOINT_REFERENCE,
+           targetQualifier: 'TotalPrice'
+          },
+          {
+           purpose:    #HEADER,
+           position:   30,
+           importance: #HIGH,
+           type:       #FIELDGROUP_REFERENCE,
+           targetQualifier: 'AdminDataCreated'
+          }
+
+          ]
+
+
+  @UI.lineItem: [{ position: 10, importance: #HIGH }]
+  @UI.fieldGroup: [{ qualifier: 'information', position: 10 ,importance: #HIGH}] // identification group postion
+  TravelId;
+  @UI.selectionField: [{ position: 10 }]
+  @UI.lineItem: [{ position: 20, importance: #HIGH }]
+  @UI.fieldGroup: [{ qualifier: 'information', position: 20 ,importance: #HIGH}]
+  AgencyId;
+  @UI.selectionField: [{ position: 20 }]
+  @UI.lineItem: [{ position: 30, importance: #HIGH }]
+  @UI.fieldGroup: [{ qualifier: 'information', position: 30 ,importance: #HIGH}]
+  CustomerId;
+  @UI.lineItem: [{ position: 40 }]
+  @UI.fieldGroup: [{ qualifier: 'total', position: 10 ,importance: #HIGH}]
+  BookingFee;
+  @UI.lineItem: [{ position: 50 }]
+  @UI.fieldGroup: [{ qualifier: 'total', position: 20 ,importance: #HIGH}]
+  @UI.dataPoint.title: 'Travel Total'
+  TotalPrice;
+  @UI.lineItem: [{ position: 60 }]
+  @UI.dataPoint.title: 'Description'
+  Description;
+  @UI.lineItem: [{ position: 70 , criticality: '_Status.StatusCriticality'}]
+  @UI.textArrangement: #TEXT_ONLY
+  @UI.dataPoint: {
+      title: 'Status',
+      criticality: '_Status.StatusCriticality'
+    }
+  TravelStatus;
+
+  @UI.fieldGroup: [{ qualifier: 'information', position: 40 ,importance: #HIGH }]
+  BeginDate;
+  @UI.fieldGroup: [{ qualifier: 'information', position: 50 ,importance: #HIGH }]
+  EndDate;
+
+  @UI.fieldGroup: [{ qualifier: 'AdminDataCreated', position: 10 ,label: 'Updated By',importance: #HIGH} ]
+  Lastchangedby;
+  @UI.fieldGroup: [{ qualifier: 'AdminDataCreated', position: 20 ,label: 'Updated',importance: #HIGH} ]
+  Lastchangedat;
+
+  @UI.hidden: true
+  AgencyName;
+  @UI.hidden: true
+  CustomerName;
+  @UI.hidden:true
+  TravelStatusTxt;
+  @UI.hidden: true
+  Createdat;
+  @UI.hidden: true
+  Createdby;
+
+}

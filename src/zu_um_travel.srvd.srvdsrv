@@ -1,0 +1,14 @@
+@EndUserText.label: 'Service for Unmanage Travel App'
+define service Zu_um_travel {
+  expose zc_um_travel as Travel;
+  expose zc_um_booking as Booking;
+  expose /DMO/I_Agency as Agency;
+  expose /DMO/I_Customer as Customer;
+  expose /DMO/I_Flight as Flight;
+  expose /DMO/I_Carrier as Carrier;
+  expose /DMO/I_Connection as Connection;
+  expose /DMO/I_Airport as Airport;
+  expose I_Currency as Currency;
+  expose I_Country as country;
+  expose zvh_travel_status as TravelOvStatus;
+}
